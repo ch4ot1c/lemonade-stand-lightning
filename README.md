@@ -12,17 +12,17 @@
 
 Sign up to [DigitalOcean](https://www.digitalocean.com/products/one-click-apps/docker/)
 
-Make your initial Docker droplet, adding an additional 250GB volume for the Bitcoin blockchain data.
+Make your initial Docker droplet, selecting 'NYC 1' and adding an additional 250GB volume for the Bitcoin blockchain data.
 
 Next, create your SSH keys to connect with:
 
 `ssh-keygen -t rsa -C "my_email@example.com" -f $HOME/.ssh/lemonade1 && ssh-keygen -y -f $HOME/.ssh/lemonade > $HOME/.ssh/lemonade.pub`
 
-(On Windows, you will need [Git Bash](https://git-scm.com/download/win) for this to work.)
+(On Windows, you will need [Git Bash](https://git-scm.com/download/win) installed for this to work.)
 
-Input the text output (your SSH public key), your SSH public key, into Digital Ocean where prompted.
+Type the output, your SSH public key, into Digital Ocean where prompted.
 
-Connect to your 'Droplet' via their instructions. You are now ready to fetch the setup script:
+Connect to your Droplet (server) uising [their instructions](https://www.digitalocean.com/community/tutorials/how-to-connect-to-your-droplet-with-ssh). You are now ready to fetch the setup script:
 
 `wget -qO- https://github.com/ch4ot1c/lemonade-stand-lightning/blob/1.0.0/setup.sh`
 

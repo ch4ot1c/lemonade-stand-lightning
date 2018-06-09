@@ -6,6 +6,7 @@
 # To run: ./setup.sh mySecretApiToken
 # -------------------------------------------------------
 
+$EXTERNAL_VOLUME_DIR="/mnt/volume-nyc1-01"
 
 if [ $# -eq 0 ]
   then
@@ -17,14 +18,12 @@ fi
 export CHARGE_TOKEN=$1
 echo $CHARGE_TOKEN | sudo tee --append /etc/environment > /dev/null
 
-cd ~
-
 # 1. Build Lightning-Charge and Nanopos
 
-# TODO script to configure additional DigitalOcean Volume
-# TODO use path /mnt/x/data to store Bitcoin Blockchain data on our 250GB volume
-mkdir ~/data
+# Use external 250GB DigitalOcean volume to store Bitcoin Blockchain data
+mkdir $EXTERNAL_VOLUME_DIR/data
 
+cd ~
 
 # Install nvm
 sudo apt-get install build-essential libssl-dev
@@ -49,7 +48,7 @@ wget https://raw.githubusercontent.com/ch4ot1c/nanopos/lemonade-stand/items.yaml
 
 
 # 2. Run Lightning-Charge (headless)
-docker run -u `id -u` -v `pwd`/data:/data -p 9112:9112 -e API_TOKEN=$CHARGE_TOKEN -e NETWORK=mainnet -d shesek/lightning-charge
+docker run -u `id -u` -v $EXTERNAL_VOLUME_DIR/data:/data -p 9112:9112 -e API_TOKEN=$CHARGE_TOKEN -e NETWORK=mainnet -d shesek/lightning-charge
 
 # 3. Run Nanopos
 
