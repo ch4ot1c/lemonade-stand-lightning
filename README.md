@@ -12,15 +12,29 @@
 
 Sign up to [DigitalOcean](https://www.digitalocean.com/products/one-click-apps/docker/)
 
-Connect to your 'Droplet' via their instructions, then type:
+Make your initial Docker droplet, adding an additional 250GB volume for the Bitcoin blockchain data.
 
-`wget https://github.com/ch4ot1c/nanopos/blob/1.0.0/setup.sh | bash`
+Next, create your SSH keys to connect with:
 
-After some setup time, you'll be ready to sell lemonade.
+`ssh-keygen -t rsa -C "my_email@example.com" -f $HOME/.ssh/lemonade1 && ssh-keygen -y -f $HOME/.ssh/lemonade > $HOME/.ssh/lemonade.pub`
+
+(On Windows, you will need [Git Bash](https://git-scm.com/download/win) for this to work.)
+
+Input the text output (your SSH public key), your SSH public key, into Digital Ocean where prompted.
+
+Connect to your 'Droplet' via their instructions. You are now ready to fetch the setup script:
+
+`wget -qO- https://github.com/ch4ot1c/lemonade-stand-lightning/blob/1.0.0/setup.sh`
+
+And run it:
+
+`./setup.sh myDesiredSecretApiTokenDoNotUseThis`
+
+After a brief setup time, you'll be ready to sell lemonade! The blockchain will need to first fully sync, which can take a while.
 
 You can access the Point-of-Sale on any web-enabled device:
 
-`http://hostname.digitalocean.com:9116`
+`http://myDigitalOceanIPAddress:9116`
 
 
 :heart:
